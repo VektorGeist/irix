@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.venv/
+venv/
+
+# Secrets — never commit
+.env
+*.key
+*.pem
+
+# Irix runtime data — galleries hold captured face frames (personal data); never commit
+*.irix
+galleries/
+captures/
+*.ppm

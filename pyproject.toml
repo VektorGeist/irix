@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "irix-eyes"
+version = "0.5.0"
+description = "Irix — deterministic, model-free computer vision. Turns pixels into structured text; recognizes by remembered exemplars, not by a trained model."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "Vektorgeist" }]
+dependencies = [
+    "numpy>=1.24",
+    "opencv-contrib-python>=4.8",   # contrib = cv2.face (LBPH) for the model-free gallery
+    "pillow>=10.0",
+]
+
+[project.optional-dependencies]
+capture = ["mss>=9.0"]              # cross-platform screen grab (webcam uses opencv directly)
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+irix = "irix.cli:main"
+irix-mcp = "irix.mcp_server:main"    # MCP stdio server (pure stdlib, no mcp dep)
+irix-watch = "irix.watch:main"       # screen-change capture daemon -> visual memory
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+irix = ["words.txt", "glyphs.irix", "tinybrain.npz"]  # bundled dictionary +
+                                                     # seeded glyph gallery +
+                                                     # tiny-brain reader weights
+                                                     # (IRIX_WORDLIST / IRIX_GALLERY_DIR /
+                                                     #  IRIX_BRAIN_DIR override)
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
