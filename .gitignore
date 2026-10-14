@@ -9,13 +9,16 @@ dist/
 .venv/
 venv/
 
+
 # Secrets — never commit
 .env
 *.key
 *.pem
 
+
 # Irix runtime data — galleries hold captured face frames (personal data); never commit
 *.irix
+!src/irix/glyphs.irix
 galleries/
 captures/
 *.ppm
